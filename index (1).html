@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Happy Holi Wishes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96c93d, #ffcc00);
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            min-height: 100vh;
+            position: relative;
+            overscroll-behavior: none;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+            font-family: 'Brush Script MT', cursive, fallback-serif;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); color: #ff00ff; }
+            50% { transform: scale(1.05); color: #00ffff; }
+        }
+
+        .gift-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .gift-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            user-select: none;
+        }
+
+        .gift-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.4);
+            z-index: 1000;
+            color: white;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .popup img {
+            max-width: 200px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: block;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+        }
+
+        .wish-link {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .wish-link:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .color-particle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 5;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-100vh); opacity: 0.7; }
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+
+        button {
+            background: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #f0f0f0;
+        }
+
+        .error-text {
+            color: #ff4444;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Holi!</h1>
+        <p>Wishing you a vibrant Holi! Click <span class="wish-link" id="wishLink">here</span> for a special wish!</p>
+        
+        <div class="gift-grid">
+            <div class="gift-item" data-gift="Sweets" data-image="https://images.herzindagi.info/image/2022/Mar/holi-sweet-recipes-main.jpg">
+                <h3>🎁 Holi Sweets</h3>
+                <p>Gujiya & Laddoos</p>
+            </div>
+            <div class="gift-item" data-gift="Colors" data-image="https://static.toiimg.com/photo/63110897.cms">
+                <h3>🌈 Holi Colors</h3>
+                <p>Organic Gulal</p>
+            </div>
+            <div class="gift-item" data-gift="Pichkari" data-image="https://i.pinimg.com/736x/0d/2d/14/0d2d1499b4df07960fe8acdffbf0fcba.jpg">
+                <h3>💦 Pichkari</h3>
+                <p>Water Gun</p>
+            </div>
+            <div class="gift-item" data-gift="Thandai" data-image="https://cf-img-a-in.tosshub.com/sites/visualstory/stories/2023_03/story_25332/assets/14.jpeg?time=1678167666">
+                <h3>🥤 Thandai</h3>
+                <p>Special Drink</p>
+            </div>
+            <div class="gift-item" data-gift="Flowers" data-image="https://media.istockphoto.com/id/2002682216/photo/abstract-explosion-of-hibiscus-flower.jpg?s=612x612&w=0&k=20&c=bwB0LaRed1VvmIGkhUETLYwHDU-qIYn7hKKvZCo9AUo=">
+                <h3>🌺 Flowers</h3>
+                <p>Holi Special</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2 id="popup-title"></h2>
+        <div id="popup-image"></div>
+        <p id="popup-message"></p>
+        <button id="closePopup">Close</button>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="colorSound" preload="auto">
+        <source src="https://cdn.pixabay.com/audio/2022/03/24/03-11-31-258_1.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="backgroundSound" preload="auto" loop>
+        <source src="https://cdn.pixabay.com/audio/2023/03/20/11-13-16-875_1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        'use strict';
+
+        // DOM Elements
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+        const popupTitle = document.getElementById('popup-title');
+        const popupImage = document.getElementById('popup-image');
+        const popupMessage = document.getElementById('popup-message');
+        const closePopup = document.getElementById('closePopup');
+        const wishLink = document.getElementById('wishLink');
+
+        // Audio Elements
+        const colorSound = document.getElementById('colorSound');
+        const backgroundSound = document.getElementById('backgroundSound');
+        backgroundSound.volume = 0.3;
+
+        // Gift Effect Images
+        const effectImages = {
+            'Colors': 'https://static.toiimg.com/photo/63110897.cms',
+            'Pichkari': 'https://i.pinimg.com/736x/0d/2d/14/0d2d1499b4df07960fe8acdffbf0fcba.jpg'
+        };
+
+        // Functions
+        function showPopup() {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+            popupTitle.textContent = 'Special Holi Wish';
+            popupMessage.textContent = 'May your life be filled with the colors of joy and happiness this Holi!';
+            popupImage.innerHTML = '';
+        }
+
+        function showGift(giftName, imageUrl) {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+            popupTitle.textContent = `Holi Gift: ${giftName}`;
+            popupMessage.textContent = `You've selected ${giftName}! Enjoy this special Holi gift!`;
+            const displayImage = (giftName === 'Colors' || giftName === 'Pichkari') ? effectImages[giftName] : imageUrl;
+            popupImage.innerHTML = `<img src="${displayImage}" alt="${giftName}" onerror="this.src='https://via.placeholder.com/200?text=Image+Failed'; this.nextSibling.style.display='block';"><span class="error-text" style="display:none;">Image failed to load</span>`;
+
+            if (giftName === 'Colors') triggerColorSplash();
+        }
+
+        function hidePopup() {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'color-particle';
+            
+            const size = Math.random() * 20 + 10;
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96c93d', '#ffcc00', '#ff00ff'];
+            const left = Math.random() * 100;
+            const duration = Math.random() * 3 + 2;
+
+            particle.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                left: ${left}vw;
+                animation-duration: ${duration}s;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+            `;
+
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), duration * 1000);
+        }
+
+        function triggerColorSplash() {
+            if (colorSound.readyState >= 2) colorSound.play().catch(() => console.log('Color sound blocked'));
+            for (let i = 0; i < 50; i++) setTimeout(() => createParticle(), i * 50);
+        }
+
+        // Event Listeners
+        wishLink.addEventListener('click', showPopup);
+        closePopup.addEventListener('click', hidePopup);
+        overlay.addEventListener('click', hidePopup);
+
+        document.querySelectorAll('.gift-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const giftName = item.dataset.gift;
+                const imageUrl = item.dataset.image;
+                showGift(giftName, imageUrl);
+            });
+            item.addEventListener('mouseenter', () => {
+                const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96c93d', '#ffcc00'];
+                item.style.background = colors[Math.floor(Math.random() * colors.length)];
+            });
+        });
+
+        // Background Sound and Autoplay Handling
+        function startBackgroundSound() {
+            if (backgroundSound.paused && backgroundSound.readyState >= 2) {
+                backgroundSound.play().catch(() => console.log('Background sound blocked until interaction'));
+            }
+        }
+        startBackgroundSound();
+        document.addEventListener('click', startBackgroundSound, { once: true });
+
+        // Normal Particle Animation
+        setInterval(() => createParticle(), 100);
+
+        // Preload Check
+        window.addEventListener('load', () => {
+            if (!colorSound.readyState || !backgroundSound.readyState) {
+                console.warn('Some audio files failed to preload');
+            }
+        });
+    </script>
+</body>
+</html>
